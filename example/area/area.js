@@ -53,16 +53,16 @@ new p5(ctx => {
   }
 
   ctx.draw = () => {
-    reset(ctx);
+    drawBackground(ctx);
     drawArea(ctx, dataset, xScale, yScale);
 
     ctx.textSize(12);
     ctx.stroke('#333333');
     drawXAxis(ctx, dataset, chartX, xScale, yScale(0), xLabels, xTickFmt);
-    drawYAxis(ctx, chartX, chartY, xScale(dataset[0].date), yScale, yLabels)
+    drawYAxis(ctx, chartX, chartY, xScale(dataset[0].date), yScale, yLabels);
   }
 
-  function reset(ctx) {
+  function drawBackground(ctx) {
     ctx
       .fill('white')
       .noStroke()
@@ -119,8 +119,7 @@ new p5(ctx => {
       ctx
         .rotate(-ctx.HALF_PI)
         .translate(chartX - 'Price ($)'.length * 5.4 - chartY, chartY + chartX - 5.4)
-        .text('Price ($)', 0, 0)
-        .resetMatrix();
+        .text('Price ($)', 0, 0);
     ctx.pop();
   }
 });

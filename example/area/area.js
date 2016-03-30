@@ -53,23 +53,16 @@ new p5(ctx => {
   }
 
   ctx.draw = () => {
-    drawBackground(ctx);
-    drawArea(ctx, dataset, xScale, yScale);
+    ctx.background('white');
+    drawArea();
 
     ctx.textSize(12);
     ctx.stroke('#333333');
-    drawXAxis(ctx, dataset, chartX, xScale, yScale(0), xLabels, xTickFmt);
-    drawYAxis(ctx, chartX, chartY, xScale(dataset[0].date), yScale, yLabels);
+    drawXAxis(yScale(0));
+    drawYAxis(xScale(dataset[0].date));
   }
 
-  function drawBackground(ctx) {
-    ctx
-      .fill('white')
-      .noStroke()
-      .rect(0, 0, ctxWidth, ctxHeight);
-  }
-
-  function drawArea(ctx, dataset, xScale, yScale) {
+  function drawArea() {
     ctx.push();
       ctx.fill('steelblue').noStroke();
       ctx.beginShape();
@@ -80,7 +73,7 @@ new p5(ctx => {
     ctx.pop();
   }
 
-  function drawXAxis(ctx, dataset, chartX, xScale, offsetY, xLabels, xTickFmt) {
+  function drawXAxis(offsetY) {
     ctx.push();
       ctx.line(chartX - 6, offsetY, xScale(dataset.last().date), offsetY);
 
@@ -99,7 +92,7 @@ new p5(ctx => {
     ctx.pop();
   }
 
-  function drawYAxis(ctx, chartX, chartY, offsetX, yScale, yLabels) {
+  function drawYAxis(offsetX) {
     ctx.push();
       ctx.line(chartX, chartY, chartX, yScale(0) + 6);
 

@@ -83,10 +83,7 @@ new p5(ctx => {
 
   function drawXAxis() {
     ctx.textAlign(ctx.CENTER);
-    data.map(({ letter }) => {
-      const scalePointer = xScale(letter);
-      ctx.text(letter, scalePointer + xScale.rangeBand() / 2, chartY + ctxHeight + 16);
-    });
+    data.map(({ letter }) => ctx.text(letter, xScale(letter) + xScale.rangeBand() / 2, chartY + ctxHeight + 16));
   }
 
   function drawYAxis() {
